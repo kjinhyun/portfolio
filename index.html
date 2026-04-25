@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김 | CAE 해석 엔지니어 포트폴리오</title>
+  <meta name="description" content="CAE 해석 엔지니어 포트폴리오 — 구조·동역학·열유동·피로해석, 해석 자동화, AI 기반 예측">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-light: #ffffff;
+      --bg-card-dark: rgba(255,255,255,0.03);
+      --bg-card-light: #ffffff;
+      --text-primary: #f7f8f8;
+      --text-secondary: #999999;
+      --text-muted: #666666;
+      --text-light-primary: #1a1a1a;
+      --text-light-secondary: #666666;
+      --accent: #76b900;
+      --accent-dark: #5a8f00;
+      --accent-glow: rgba(118,185,0,0.15);
+      --border-dark: rgba(255,255,255,0.08);
+      --border-light: #e0e0e0;
+      --border-accent: #76b900;
+      --radius: 2px;
+      --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --max-width: 1200px;
+      --section-pad: 100px 24px;
+      --section-pad-mobile: 60px 16px;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background: var(--bg-dark);
+      line-height: 1.7;
+      word-break: keep-all;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    .section-dark { background: var(--bg-dark); color: var(--text-primary); }
+    .section-light { background: var(--bg-light); color: var(--text-light-primary); }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-body);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 48px;
+    }
+    .section-dark .section-title { color: var(--text-primary); }
+    .section-light .section-title { color: var(--text-light-primary); }
+    .accent-line {
+      display: inline-block;
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 32px;
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .scroll-reveal-delay-1 { transition-delay: 0.1s; }
+    .scroll-reveal-delay-2 { transition-delay: 0.2s; }
+    .scroll-reveal-delay-3 { transition-delay: 0.3s; }
+    .scroll-reveal-delay-4 { transition-delay: 0.4s; }
+    .scroll-reveal-delay-5 { transition-delay: 0.5s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 24px;
+      transition: background 0.3s ease, border-color 0.3s ease, padding 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--border-dark);
+      padding: 12px 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+      letter-spacing: 0.3px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-primary);
+    }
+    .nav-links a.active {
+      color: var(--accent);
+    }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,10,10,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .nav-mobile a:hover { color: var(--accent); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(transparent, var(--bg-light));
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .hero-name {
+      font-family: var(--font-mono);
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    .hero-title {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid var(--accent);
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: #8ad400;
+      border-color: #8ad400;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+    }
+    .btn-ghost:hover {
+      background: var(--accent-glow);
+    }
+
+    /* ===== COMPETENCIES ===== */
+    .competencies { padding: var(--section-pad); }
+    .competencies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .comp-card {
+      background: var(--bg-card-light);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .comp-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .comp-card:hover::before { transform: scaleX(1); }
+    .comp-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .comp-icon {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .comp-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-light-primary);
+      margin-bottom: 12px;
+    }
+    .comp-desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-light-secondary);
+      line-height: 1.8;
+    }
+
+    /* ===== SKILLS ===== */
+    .skills { padding: var(--section-pad); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .skill-category-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill {
+      display: inline-block;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      background: var(--bg-card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 9999px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .pill:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* ===== PROJECTS ===== */
+    .projects { padding: var(--section-pad); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--bg-card-light);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .project-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-dark);
+      background: rgba(118,185,0,0.08);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+    .project-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-light-primary);
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    .project-body {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-light-secondary);
+      line-height: 1.8;
+      flex-grow: 1;
+    }
+    .project-body strong {
+      color: var(--text-light-primary);
+      font-weight: 600;
+    }
+    .project-tools {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tool-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: #f5f5f5;
+      padding: 4px 10px;
+      border-radius: var(--radius);
+    }
+
+    /* ===== PUBLICATIONS ===== */
+    .publications { padding: var(--section-pad); }
+    .pub-list { display: flex; flex-direction: column; gap: 24px; }
+    .pub-item {
+      padding-left: 20px;
+      border-left: 2px solid var(--accent);
+      transition: border-color 0.2s ease;
+    }
+    .pub-item:hover { border-color: #8ad400; }
+    .pub-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+    .pub-meta {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .pub-meta span { color: var(--accent); font-weight: 500; }
+    .pub-summary {
+      margin-top: 32px;
+      padding: 20px 24px;
+      background: var(--bg-card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .pub-summary strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ===== EDUCATION ===== */
+    .education { padding: var(--section-pad); }
+    .edu-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 32px;
+      background: var(--bg-card-light);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+    }
+    .edu-period {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent-dark);
+      white-space: nowrap;
+      min-width: 120px;
+      padding-top: 3px;
+    }
+    .edu-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-light-primary);
+      margin-bottom: 4px;
+    }
+    .edu-detail {
+      font-size: 14px;
+      color: var(--text-light-secondary);
+    }
+
+    /* ===== PHILOSOPHY ===== */
+    .philosophy { padding: var(--section-pad); }
+    .philosophy-content { max-width: 800px; }
+    .philosophy-quote {
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1.8;
+      padding: 40px 0;
+      border-top: 2px solid var(--accent);
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 48px;
+      font-style: italic;
+    }
+    .philosophy-quote::before { content: '"'; color: var(--accent); font-size: 48px; font-weight: 700; display: block; line-height: 1; margin-bottom: 16px; font-style: normal; }
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .phi-item {
+      padding: 28px 24px;
+      background: var(--bg-card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+    }
+    .phi-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .phi-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .phi-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 48px 24px;
+      border-top: 1px solid var(--border-dark);
+      text-align: center;
+    }
+    .footer-inner { max-width: var(--max-width); margin: 0 auto; }
+    .footer-contacts {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-contact {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .footer-contact-icon { color: var(--accent); font-size: 14px; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .competencies-grid { grid-template-columns: repeat(2, 1fr); }
+      .philosophy-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      :root { --section-pad: 60px 20px; }
+      .hero-name { font-size: 40px; }
+      .hero-title { font-size: 18px; }
+      .section-title { font-size: 26px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .competencies-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .philosophy-quote { font-size: 18px; padding: 28px 0; }
+      .edu-card { flex-direction: column; gap: 8px; }
+      .edu-period { min-width: auto; }
+    }
+    @media (max-width: 480px) {
+      .hero-name { font-size: 32px; }
+      .hero { padding: 100px 16px 60px; }
+      .section-title { font-size: 22px; margin-bottom: 32px; }
+      .container { padding: 0 16px; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .btn { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 360px) {
+      .hero-name { font-size: 28px; }
+      .hero-title { font-size: 16px; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      @page { margin: 1.5cm; size: A4; }
+      html { scroll-behavior: auto; }
+      body { background: white !important; color: #1a1a1a !important; }
+      .nav, .nav-mobile, .hero-cta, .scroll-reveal { display: none !important; }
+      .scroll-reveal { opacity: 1 !important; transform: none !important; }
+      .section-dark { background: white !important; }
+      .section-light { background: white !important; }
+      .hero { min-height: auto; padding: 40px 0; }
+      .hero::after { display: none; }
+      .hero-name { color: #1a1a1a !important; }
+      .hero-title { color: #5a8f00 !important; }
+      .hero-subtitle { color: #666666 !important; }
+      .section-label { color: #5a8f00 !important; }
+      .section-title { color: #1a1a1a !important; }
+      .comp-card, .project-card, .edu-card, .phi-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+      }
+      .project-badge { color: #5a8f00 !important; background: #f5f5f5 !important; }
+      .pill { border: 1px solid #ddd !important; background: #f9f9f9 !important; color: #333 !important; }
+      .pub-item { border-left-color: #5a8f00 !important; }
+      .pub-title { color: #1a1a1a !important; }
+      .pub-meta span { color: #5a8f00 !important; }
+      .philosophy-quote { color: #333 !important; border-top-color: #5a8f00 !important; border-bottom-color: #ddd !important; }
+      .phi-num { color: #5a8f00 !important; }
+      .phi-title { color: #1a1a1a !important; }
+      .phi-desc { color: #666 !important; }
+      .tool-tag { background: #f5f5f5 !important; color: #666 !important; }
+      .footer { border-top-color: #ddd !important; }
+      .footer-contact { color: #666 !important; }
+      .footer-contact-icon { color: #5a8f00 !important; }
+      .footer-copy { color: #999 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; }
+      a { color: #333 !important; text-decoration: underline !important; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header>
+  <nav class="nav" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">KIM.</a>
+      <div class="nav-links">
+        <a href="#competencies">역량</a>
+        <a href="#skills">기술</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#publications">논문</a>
+        <a href="#philosophy">철학</a>
+        <a href="#contact">연락처</a>
+      </div>
+      <div class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()" role="button" aria-label="메뉴 열기" aria-expanded="false" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="#hero" onclick="closeMobileNav()">소개</a>
+    <a href="#competencies" onclick="closeMobileNav()">역량</a>
+    <a href="#skills" onclick="closeMobileNav()">기술</a>
+    <a href="#projects" onclick="closeMobileNav()">프로젝트</a>
+    <a href="#publications" onclick="closeMobileNav()">논문</a>
+    <a href="#philosophy" onclick="closeMobileNav()">철학</a>
+    <a href="#contact" onclick="closeMobileNav()">연락처</a>
+  </div>
+  </nav>
+  </header>
+
+  <main>
+  <section class="hero section-dark" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-name">김</h1>
+      <p class="hero-title">CAE 해석 엔지니어</p>
+      <p class="hero-subtitle">
+        구조 · 동역학 · 열유동 · 피로해석<br>
+        해석 자동화 · AI 기반 설계 예측<br>
+        검증된 해석으로 설계 신뢰도를 확보하는 엔지니어
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+        <a href="#contact" class="btn btn-ghost">연락처</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CORE COMPETENCIES ===== -->
+  <section class="competencies section-light" id="competencies">
+    <div class="container">
+      <div class="scroll-reveal">
+        <p class="section-label">Competencies</p>
+        <h2 class="section-title">핵심 역량</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="competencies-grid">
+        <div class="comp-card scroll-reveal scroll-reveal-delay-1">
+          <div class="comp-icon">🔬</div>
+          <h3 class="comp-title">다물리 현상 통합 진단</h3>
+          <p class="comp-desc">
+            구조, 동역학, 유동 등 다양한 해석 도구를 자유롭게 활용하여 문제를 입체적으로 바라봅니다.
+            복잡한 하중 조건을 정교하게 정의하고 응력 집중 및 변형 원인을 다각도에서 찾아내는 문제 해결 능력을 갖추고 있습니다.
+          </p>
+        </div>
+        <div class="comp-card scroll-reveal scroll-reveal-delay-2">
+          <div class="comp-icon">✅</div>
+          <h3 class="comp-title">시험 기반 신뢰도 확보</h3>
+          <p class="comp-desc">
+            "검증되지 않은 해석은 단순한 그래픽에 불과하다"는 철학으로 업무에 임합니다.
+            만능시험기나 열전대 등으로 계측된 시험 데이터와 해석 결과의 오차를 줄이기 위해
+            물성치 튜닝 및 경계 조건 고도화를 끝까지 수행합니다.
+          </p>
+        </div>
+        <div class="comp-card scroll-reveal scroll-reveal-delay-3">
+          <div class="comp-icon">⚡</div>
+          <h3 class="comp-title">신기술 도입과 혁신 실행력</h3>
+          <p class="comp-desc">
+            전통적인 CAE 분석가에 머무르지 않고, AI 에이전트로 해석 프로세스를 자동화하고
+            머신러닝으로 강도 예측 모델을 개발합니다.
+            데이터 기반의 혁신 역량을 실무에 이식하여 해석 리드타임을 단축합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TECHNICAL SKILLS ===== -->
+  <section class="skills section-dark" id="skills">
+    <div class="container">
+      <div class="scroll-reveal">
+        <p class="section-label">Technical Skills</p>
+        <h2 class="section-title">기술 스택</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="scroll-reveal scroll-reveal-delay-1">
+          <p class="skill-category-label">구조 · 동역학 해석</p>
+          <div class="skill-pills">
+            <span class="pill">ANSYS</span>
+            <span class="pill">ABAQUS</span>
+            <span class="pill">RecurDyn</span>
+            <span class="pill">FEMFAT</span>
+          </div>
+        </div>
+        <div class="scroll-reveal scroll-reveal-delay-2">
+          <p class="skill-category-label">열유동 · 조명 해석</p>
+          <div class="skill-pills">
+            <span class="pill">Fluent</span>
+            <span class="pill">AcuSolve</span>
+            <span class="pill">Speos</span>
+          </div>
+        </div>
+        <div class="scroll-reveal scroll-reveal-delay-3">
+          <p class="skill-category-label">CAD · 설계</p>
+          <div class="skill-pills">
+            <span class="pill">CATIA</span>
+            <span class="pill">CATIA Script</span>
+          </div>
+        </div>
+        <div class="scroll-reveal scroll-reveal-delay-4">
+          <p class="skill-category-label">프로그래밍 · 자동화</p>
+          <div class="skill-pills">
+            <span class="pill">Python</span>
+            <span class="pill">TensorFlow / Keras</span>
+            <span class="pill">ABAQUS Script</span>
+            <span class="pill">AI OpenClaw</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="projects section-light" id="projects">
+    <div class="container">
+      <div class="scroll-reveal">
+        <p class="section-label">Projects</p>
+        <h2 class="section-title">주요 프로젝트</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card scroll-reveal scroll-reveal-delay-1">
+          <span class="project-badge">구조해석 · 비선형</span>
+          <h3 class="project-title">Head Impact 충돌 해석</h3>
+          <div class="project-body">
+            <strong>문제:</strong> 자동차 안전 법규 Head Impact 인증 단계 불만족 발생<br>
+            <strong>접근:</strong> 비선형 충돌 해석으로 변형 경향 파악, 충돌시험 참관 및 고품/파단면 분석으로 원인 규명<br>
+            <strong>결과:</strong> 취약 부위 구조 보강 및 형상 변경으로 인증 통과, 구조 건전성 확보
+          </div>
+          <div class="project-tools">
+            <span class="tool-tag">ABAQUS</span>
+            <span class="tool-tag">비선형 해석</span>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card scroll-reveal scroll-reveal-delay-2">
+          <span class="project-badge">동역학 · MBD</span>
+          <h3 class="project-title">멀티펑션 MBD+구조 연계 해석</h3>
+          <div class="project-body">
+            <strong>문제:</strong> 복잡한 링크/힌지 메커니즘의 동적 거동 및 조인트 반력 산출 필요<br>
+            <strong>접근:</strong> 다물체 동역학(MBD) 해석으로 동하중 도출, 구조 해석의 경계조건으로 매핑하는 연계 프로세스 수행<br>
+            <strong>결과:</strong> 정해석 대비 실제 작동 환경에 근접한 응력 분포 도출, 최적 설계 지원
+          </div>
+          <div class="project-tools">
+            <span class="tool-tag">RecurDyn</span>
+            <span class="tool-tag">ABAQUS</span>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="project-card scroll-reveal scroll-reveal-delay-1">
+          <span class="project-badge">열유동해석</span>
+          <h3 class="project-title">인버터/WPC 열관리 최적화</h3>
+          <div class="project-body">
+            <strong>문제:</strong> 인버터 과열로 전원 차단, WPC 과열로 시험 불만족 발생<br>
+            <strong>접근:</strong> 열유동 해석 후 열전대로 해석-시험 정합성 검증, 유동 정체 구간 파악 후 유량 분배 구조 변경 제안<br>
+            <strong>결과:</strong> 인버터 냉각 성능 <strong>20%</strong>, 무선충전기 냉각 성능 <strong>30%</strong> 향상, 제품 안정성 확보
+          </div>
+          <div class="project-tools">
+            <span class="tool-tag">AcuSolve</span>
+            <span class="tool-tag">CFD</span>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="project-card scroll-reveal scroll-reveal-delay-2">
+          <span class="project-badge">열전달해석</span>
+          <h3 class="project-title">히트싱크 구조 개선</h3>
+          <div class="project-body">
+            <strong>문제:</strong> 차량용 인버터 발열로 인한 전원 차단 문제<br>
+            <strong>접근:</strong> 열전달 해석으로 비효율적 열전달 구조 파악, 열전대 및 열적외선 측정기로 정합성 검증<br>
+            <strong>결과:</strong> 전자/전기적 회로 변경 없이 순수 기구 구조 변경만으로 과열 문제 해결, 비용 상승 없이 안정성 극대화
+          </div>
+          <div class="project-tools">
+            <span class="tool-tag">AcuSolve</span>
+            <span class="tool-tag">열전달 해석</span>
+          </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="project-card scroll-reveal scroll-reveal-delay-1">
+          <span class="project-badge">AI / 머신러닝</span>
+          <h3 class="project-title">ML 기반 강도 예측 모델</h3>
+          <div class="project-body">
+            <strong>문제:</strong> 수일이 소요되는 반복 해석 루틴으로 설계 검증 리드타임 지연<br>
+            <strong>접근:</strong> 수백 개 해석 케이스 학습, 설계 변수 입력 시 즉각적 성능(최대 응력, Pass/Fail) 출력 모델 구축<br>
+            <strong>결과:</strong> 해석 리드타임 <strong>수일 → 초 단위</strong> 단축, 비전문가도 설계 인자를 즉각 파악할 수 있는 환경 구축, 한국자동차공학회 논문 발표
+          </div>
+          <div class="project-tools">
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">TensorFlow</span>
+            <span class="tool-tag">Keras</span>
+          </div>
+        </div>
+        <!-- Project 6 -->
+        <div class="project-card scroll-reveal scroll-reveal-delay-2">
+          <span class="project-badge">해석 자동화</span>
+          <h3 class="project-title">해석 자동화 플랫폼</h3>
+          <div class="project-body">
+            <strong>문제:</strong> 로드 강도/진동 해석의 반복적 전처리로 리드타임 장기화<br>
+            <strong>접근:</strong> Python 기반 전처리 자동화 프로그램 개발, 웹서비스 형식으로 플랫폼화 진행<br>
+            <strong>결과:</strong> 전처리 <strong>80% 이상 자동화</strong>, 전체 리드타임 <strong>3일 → 2시간</strong> 혁신적 단축
+          </div>
+          <div class="project-tools">
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">ABAQUS Script</span>
+            <span class="tool-tag">CATIA Script</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PUBLICATIONS ===== -->
+  <section class="publications section-dark" id="publications">
+    <div class="container">
+      <div class="scroll-reveal">
+        <p class="section-label">Publications</p>
+        <h2 class="section-title">학술 실적</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="pub-list">
+        <div class="pub-item scroll-reveal scroll-reveal-delay-1">
+          <p class="pub-title">머신러닝 기법을 이용한 스위치류 체결부의 강도 예측 모델 개발</p>
+          <p class="pub-meta">
+            <span>제1저자</span> · 한국자동차공학회 학술대회 · 2024<br>
+            TensorFlow/Keras 기반 다층퍼셉트론 회귀 모델, 오차율 11% 수준 예측 신뢰도 확보
+          </p>
+        </div>
+        <div class="pub-item scroll-reveal scroll-reveal-delay-2">
+          <p class="pub-title">차량용 AC 인버터 발열 저감을 위한 열유동 해석에 관한 연구</p>
+          <p class="pub-meta">
+            <span>제1저자</span> · 한국자동차공학회 학술대회 · 2024<br>
+            소자(PCB)~시스템 2단계 열유동 해석, 실물 온도 측정 결과와 비교하여 해석 정합성 확보
+          </p>
+        </div>
+        <div class="pub-item scroll-reveal scroll-reveal-delay-3">
+          <p class="pub-title">차량용 수냉식 인버터의 CFD 해석을 통한 냉각 성능 평가</p>
+          <p class="pub-meta">
+            <span>제1저자</span> · 한국자동차공학회 학술대회 · 2024<br>
+            수냉식 냉각 유로의 내부 열유동 특성 분석, 실제 작동 환경 온도 측정으로 해석 모델 신뢰성 검증
+          </p>
+        </div>
+      </div>
+      <div class="pub-summary scroll-reveal">
+        <strong>학술대회 발표 실적:</strong> 2024년 4건, 2025년 2건 (공동저자 포함)
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section class="education section-light" id="education">
+    <div class="container">
+      <div class="scroll-reveal">
+        <p class="section-label">Education</p>
+        <h2 class="section-title">학력</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="edu-card scroll-reveal">
+        <div class="edu-period">2008 — 2017</div>
+        <div>
+          <p class="edu-name">딩동댕대학교</p>
+          <p class="edu-detail">기계공학 (석·박사 통합과정)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHILOSOPHY ===== -->
+  <section class="philosophy section-dark" id="philosophy">
+    <div class="container">
+      <div class="scroll-reveal">
+        <p class="section-label">Philosophy</p>
+        <h2 class="section-title">엔지니어 철학</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="philosophy-content">
+        <blockquote class="philosophy-quote scroll-reveal">
+          검증되지 않은 해석은 단순한 그래픽에 불과하다.
+          시험 데이터와의 교차 검증을 통해 얻은 신뢰도만이 진정한 엔지니어링 가치다.
+        </blockquote>
+        <div class="philosophy-grid">
+          <div class="phi-item scroll-reveal scroll-reveal-delay-1">
+            <p class="phi-num">01</p>
+            <h3 class="phi-title">다물리 현상의 통합적 이해</h3>
+            <p class="phi-desc">
+              구조, 동역학, 유동 등 개별 물리 현상을 깊이 이해하면서도 복합적으로 통합 진단합니다.
+              실무에서 축적된 해석 노하우로 복잡한 하중 조건을 정교하게 정의합니다.
+            </p>
+          </div>
+          <div class="phi-item scroll-reveal scroll-reveal-delay-2">
+            <p class="phi-num">02</p>
+            <h3 class="phi-title">시험 기반 신뢰도 확보</h3>
+            <p class="phi-desc">
+              Solver를 돌리는 것에 만족하지 않고, 시험 데이터와의 오차를 줄이기 위해
+              물성치 튜닝과 경계 조건 고도화를 끝까지 수행하는 집요함이 최대 강점입니다.
+            </p>
+          </div>
+          <div class="phi-item scroll-reveal scroll-reveal-delay-3">
+            <p class="phi-num">03</p>
+            <h3 class="phi-title">신기술의 실무적 적용</h3>
+            <p class="phi-desc">
+              AI 에이전트로 해석을 자동화하고, 머신러닝으로 강도를 예측합니다.
+              혁신 역량을 실무에 이식하여 해석 리드타임을 단축하고 설계 완성도를 높입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer section-dark" id="contact">
+    <div class="footer-inner">
+      <div class="footer-contacts">
+        <div class="footer-contact">
+          <span class="footer-contact-icon">✉</span>
+          kjinhyun@gmail.com
+        </div>
+        <div class="footer-contact">
+          <span class="footer-contact-icon">☎</span>
+          000-0000-0000
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/kjinhyun" target="_blank">GitHub</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 김. All rights reserved.</p>
+    </div>
+  </footer>
+  </main>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // === Scroll Reveal ===
+    (function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.scroll-reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+
+    // === Sticky Nav ===
+    (function() {
+      var nav = document.getElementById('navbar');
+      var sections = document.querySelectorAll('section[id]');
+      var navLinks = document.querySelectorAll('.nav-links a');
+
+      window.addEventListener('scroll', function() {
+        // Add scrolled class
+        if (window.scrollY > 80) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+
+        // Highlight active section
+        var current = '';
+        sections.forEach(function(section) {
+          var top = section.offsetTop - 120;
+          if (window.scrollY >= top) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      });
+    })();
+
+    // === Mobile Nav ===
+    function toggleMobileNav() {
+      document.getElementById('hamburger').classList.toggle('open');
+      document.getElementById('mobileNav').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMobileNav() {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('mobileNav').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+
+</body>
+</html>
