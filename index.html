@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김진현 | CAE 해석 엔지니어 — Portfolio</title>
+  <meta name="description" content="8년 차 CAE 해석 엔지니어 포트폴리오 — 구조·동역학·열유동·피로해석, 해석 자동화, AI 기반 예측">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== ILJIN BRAND DESIGN TOKENS ===== */
+    :root {
+      --iljin-blue: #006dbb;
+      --iljin-blue-dark: #005599;
+      --iljin-navy: #000113;
+      --iljin-navy-mid: #0a1628;
+      --iljin-navy-light: #132744;
+      --bg-white: #ffffff;
+      --bg-light: #f8fafd;
+      --bg-card: #ffffff;
+      --text-primary: #f7f8f8;
+      --text-secondary: #a0b0c4;
+      --text-muted: #6b7f99;
+      --text-dark-primary: #1a1a2e;
+      --text-dark-secondary: #4a5568;
+      --text-dark-muted: #718096;
+      --border-dark: rgba(255,255,255,0.08);
+      --border-light: #e2e8f0;
+      --accent: var(--iljin-blue);
+      --accent-dark: var(--iljin-blue-dark);
+      --accent-glow: rgba(0,109,187,0.12);
+      --accent-glow-strong: rgba(0,109,187,0.2);
+      --radius: 4px;
+      --font-kr: 'Noto Sans KR', 'Inter', system-ui, sans-serif;
+      --font-en: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --max-width: 1100px;
+      --section-pad: 100px 24px;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 18px; }
+    body {
+      font-family: var(--font-kr);
+      color: var(--text-primary);
+      background: var(--iljin-navy);
+      line-height: 1.75;
+      word-break: keep-all;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    .section-dark { background: var(--iljin-navy); color: var(--text-primary); }
+    .section-navy { background: var(--iljin-navy-mid); color: var(--text-primary); }
+    .section-light { background: var(--bg-white); color: var(--text-dark-primary); }
+    .section-alt { background: var(--bg-light); color: var(--text-dark-primary); }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 48px;
+    }
+    .section-dark .section-title, .section-navy .section-title { color: var(--text-primary); }
+    .section-light .section-title, .section-alt .section-title { color: var(--text-dark-primary); }
+    .accent-line {
+      display: inline-block;
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--iljin-blue-dark));
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .sr { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .sr.show { opacity: 1; transform: translateY(0); }
+    .sr-d1 { transition-delay: 0.1s; }
+    .sr-d2 { transition-delay: 0.2s; }
+    .sr-d3 { transition-delay: 0.3s; }
+    .sr-d4 { transition-delay: 0.4s; }
+    @media (prefers-reduced-motion: reduce) {
+      .sr { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 16px 24px;
+      transition: background 0.3s, border-color 0.3s, padding 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(10,22,40,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom-color: var(--border-dark);
+      padding: 12px 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-en);
+      font-size: 20px; font-weight: 700;
+      color: var(--accent); letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      font-size: 15px; font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span {
+      width: 22px; height: 2px; background: var(--text-primary);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .nav-mobile {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,1,19,0.98); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: var(--font-mono); font-size: 20px; font-weight: 500;
+      color: var(--text-secondary); transition: color 0.2s;
+    }
+    .nav-mobile a:hover { color: var(--accent); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px; position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(0,109,187,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+      background: linear-gradient(transparent, var(--bg-white)); pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .hero-name {
+      font-family: var(--font-en);
+      font-size: 56px; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 8px; letter-spacing: -1px;
+    }
+    .hero-subname {
+      font-size: 18px; font-weight: 400; color: var(--text-secondary);
+      margin-bottom: 24px; letter-spacing: 4px;
+    }
+    .hero-title {
+      font-size: 22px; font-weight: 600;
+      color: var(--accent); margin-bottom: 24px;
+    }
+    .hero-subtitle {
+      font-size: 17px; font-weight: 400; color: var(--text-secondary);
+      line-height: 1.9; margin-bottom: 40px;
+    }
+    .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; font-family: var(--font-kr);
+      font-size: 16px; font-weight: 600; border-radius: var(--radius);
+      cursor: pointer; transition: all 0.2s; border: 2px solid var(--accent);
+    }
+    .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn-ghost { background: transparent; color: var(--text-primary); }
+    .btn-ghost:hover { background: var(--accent-glow); }
+
+    /* ===== CAREER ===== */
+    .career { padding: var(--section-pad); }
+    .career-list { display: flex; flex-direction: column; gap: 56px; }
+    .career-company {
+      display: flex; gap: 32px; align-items: flex-start;
+      padding: 32px; border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .career-period-block {
+      flex-shrink: 0; min-width: 150px; padding-top: 2px;
+    }
+    .career-period {
+      font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+      color: var(--accent); white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .career-period::before {
+      content: ''; display: inline-block;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+    }
+    .career-company-name {
+      font-size: 22px; font-weight: 700; color: var(--text-dark-primary); margin-top: 6px;
+    }
+    .career-role {
+      font-size: 15px; color: var(--text-dark-muted); margin-top: 4px; font-weight: 400;
+    }
+    .career-detail { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+    .career-category {}
+    .career-category:last-child { margin-bottom: 0; }
+    .career-category-header {
+      font-size: 15px; font-weight: 700;
+      color: var(--accent-dark);
+      letter-spacing: 0.5px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 12px;
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .career-category-summary {
+      font-size: 13px; font-weight: 400;
+      color: var(--text-dark-muted);
+      letter-spacing: 0; font-family: var(--font-kr);
+    }
+    .career-task {
+      display: flex; gap: 0; align-items: flex-start;
+      padding: 12px 0 12px 16px; margin-bottom: 2px;
+      border-left: 3px solid var(--border-light);
+      border-radius: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .career-task:hover {
+      border-left-color: var(--accent);
+      background: rgba(0,109,187,0.03);
+    }
+    .career-task-bullet { display: none; }
+    .career-task-content { flex: 1; }
+    .career-task-name {
+      font-size: 17px; font-weight: 600; color: var(--text-dark-primary);
+      margin-bottom: 2px;
+    }
+    .career-task-desc {
+      font-size: 13.5px; color: var(--text-dark-secondary); line-height: 1.75;
+    }
+    .career-task-tags {
+      display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px;
+    }
+    .career-task-tag {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+      color: var(--accent-dark); background: rgba(0,109,187,0.08);
+      padding: 3px 10px; border-radius: 4px;
+      border: 1px solid rgba(0,109,187,0.12);
+    }
+    @media (max-width: 768px) {
+      .career-company { flex-direction: column; gap: 16px; padding: 20px; }
+      .career-period-block { min-width: auto; }
+    }
+
+    /* ===== COMPETENCIES ===== */
+    .competencies { padding: var(--section-pad); }
+    .competencies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .comp-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: var(--radius); padding: 36px 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .comp-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .comp-card:hover::before { transform: scaleX(1); }
+    .comp-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .comp-icon { font-size: 30px; margin-bottom: 20px; }
+    .comp-title { font-size: 19px; font-weight: 700; color: var(--text-dark-primary); margin-bottom: 12px; }
+    .comp-desc { font-size: 16px; color: var(--text-dark-secondary); line-height: 1.8; }
+
+    /* ===== PROJECTS (Detailed) ===== */
+    .projects { padding: var(--section-pad); }
+    .project-list { display: flex; flex-direction: column; gap: 40px; }
+    .project-item {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: var(--radius); overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .project-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .project-header {
+      padding: 28px 32px; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .project-header:hover { background: var(--bg-light); }
+    .project-header-left { flex: 1; }
+    .project-badge {
+      display: inline-block; font-family: var(--font-mono);
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--accent-dark);
+      background: var(--accent-glow); padding: 4px 12px;
+      border-radius: 9999px; margin-bottom: 12px;
+    }
+    .project-name {
+      font-size: 22px; font-weight: 700;
+      color: var(--text-dark-primary); margin-bottom: 8px;
+    }
+    .project-summary { font-size: 16px; color: var(--text-dark-secondary); line-height: 1.7; }
+    .project-toggle {
+      font-family: var(--font-mono); font-size: 22px;
+      color: var(--accent); cursor: pointer;
+      padding: 8px 0 8px 16px; transition: transform 0.3s;
+      user-select: none;
+    }
+    .project-toggle.open { transform: rotate(45deg); }
+    .project-detail {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .project-detail.open { max-height: 2000px; }
+    .project-detail-inner {
+      padding: 0 32px 32px; border-top: 1px solid var(--border-light);
+    }
+    .detail-section { margin-top: 24px; }
+    .detail-section-title {
+      font-family: var(--font-mono); font-size: 17px; font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1.5px; margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .detail-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px 24px;
+    }
+    .detail-item {
+      font-size: 15px; color: var(--text-dark-secondary); line-height: 1.5;
+    }
+    .detail-item strong {
+      display: block;
+      color: var(--accent); font-weight: 600; font-size: 12px;
+      letter-spacing: 0.5px; margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+    .detail-list { font-size: 16px; color: var(--text-dark-secondary); line-height: 1.9; }
+    .detail-list li { padding-left: 16px; position: relative; margin-bottom: 4px; }
+    .detail-list li::before {
+      content: ''; position: absolute; left: 0; top: 10px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+    }
+    .detail-table {
+      width: 100%; border-collapse: collapse; font-size: 15px;
+    }
+    .detail-table th {
+      text-align: left; padding: 10px 12px; font-weight: 600;
+      color: var(--text-dark-primary); background: var(--bg-light);
+      border-bottom: 2px solid var(--accent);
+    }
+    .detail-table td {
+      padding: 10px 12px; color: var(--text-dark-secondary);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .project-tools {
+      margin-top: 20px; padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .tool-tag {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+      color: var(--text-dark-muted); background: #f1f5f9;
+      padding: 4px 12px; border-radius: var(--radius);
+    }
+
+    /* ===== SKILLS ===== */
+    .skills { padding: var(--section-pad); }
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .skill-category-label {
+      font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill {
+      display: inline-block; padding: 8px 16px;
+      font-size: 15px; font-weight: 500; color: var(--text-primary);
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border-dark);
+      border-radius: 9999px; transition: border-color 0.2s, background 0.2s;
+    }
+    .pill:hover { border-color: var(--accent); background: var(--accent-glow); }
+
+    /* ===== PUBLICATIONS ===== */
+    .publications { padding: var(--section-pad); }
+    .pub-list { display: flex; flex-direction: column; gap: 24px; }
+    .pub-item { padding-left: 20px; border-left: 3px solid var(--accent); transition: border-color 0.2s; }
+    .pub-item:hover { border-color: #3399dd; }
+    .pub-title { font-size: 17px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; line-height: 1.6; }
+    .pub-meta { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+    .pub-meta span { color: var(--accent); font-weight: 500; }
+    .pub-summary {
+      margin-top: 32px; padding: 20px 24px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border-dark);
+      border-radius: var(--radius); font-size: 16px; color: var(--text-secondary);
+    }
+    .pub-summary strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ===== EDUCATION & AWARDS ===== */
+    .education { padding: var(--section-pad); }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .edu-card {
+      padding: 28px; background: var(--bg-card);
+      border: 1px solid var(--border-light); border-radius: var(--radius);
+    }
+    .edu-period {
+      font-family: var(--font-mono); font-size: 15px; font-weight: 500;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .edu-name { font-size: 19px; font-weight: 700; color: var(--text-dark-primary); margin-bottom: 4px; }
+    .edu-detail { font-size: 16px; color: var(--text-dark-secondary); }
+    .award-item { padding: 8px 0; border-bottom: 1px solid var(--border-light); }
+    .award-item:last-child { border-bottom: none; }
+    .award-name { font-size: 16px; font-weight: 600; color: var(--text-dark-primary); }
+    .award-meta { font-size: 15px; color: var(--text-dark-muted); }
+
+    /* ===== PHILOSOPHY ===== */
+    .philosophy { padding: var(--section-pad); }
+    .philosophy-content { max-width: 800px; }
+    .philosophy-quote {
+      font-size: 22px; font-weight: 300; color: var(--text-primary);
+      line-height: 1.9; padding: 40px 0;
+      border-top: 3px solid var(--accent);
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 48px; font-style: italic;
+    }
+    .philosophy-quote::before {
+      content: '"'; color: var(--accent); font-size: 50px; font-weight: 700;
+      display: block; line-height: 1; margin-bottom: 16px; font-style: normal;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 48px 24px; border-top: 1px solid var(--border-dark); text-align: center;
+    }
+    .footer-inner { max-width: var(--max-width); margin: 0 auto; }
+    .footer-contacts { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
+    .footer-contact { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--text-secondary); }
+    .footer-contact-icon { color: var(--accent); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
+    .footer-links a { font-size: 15px; color: var(--text-secondary); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .competencies-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      :root { --section-pad: 60px 20px; }
+      .hero-name { font-size: 44px; }
+      .hero-title { font-size: 20px; }
+      .section-title { font-size: 28px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .competencies-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .project-header { flex-direction: column; }
+      .project-toggle { padding: 8px 0 0 0; }
+    }
+    @media (max-width: 480px) {
+      .hero-name { font-size: 32px; }
+      .hero { padding: 100px 16px 60px; }
+      .section-title { font-size: 24px; margin-bottom: 32px; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      @page { margin: 1.5cm; size: A4; }
+      html { scroll-behavior: auto; }
+      body { background: white !important; color: #1a1a1a !important; }
+      .nav, .nav-mobile, .hero-cta, .sr, .project-toggle { display: none !important; }
+      .sr { opacity: 1 !important; transform: none !important; }
+      .section-dark, .section-navy { background: white !important; }
+      .hero { min-height: auto; padding: 40px 0; }
+      .hero::before, .hero::after { display: none; }
+      .hero-name, .section-title, .project-name, .comp-title { color: #1a1a1a !important; }
+      .hero-title, .section-label, .career-period, .edu-period { color: #006dbb !important; }
+      .project-detail { max-height: none !important; overflow: visible !important; }
+      .project-item, .comp-card, .edu-card { box-shadow: none !important; border: 1px solid #ddd !important; break-inside: avoid; }
+      .career-company { box-shadow: none !important; border: 1px solid #ddd !important; break-inside: avoid; }
+      .career-task { border-left: 2px solid #ccc !important; }
+      section { break-inside: avoid; }
+      a { color: #333 !important; text-decoration: underline !important; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header>
+  <nav class="nav" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">KIM J.H.</a>
+      <div class="nav-links">
+        <a href="#career">경력</a>
+        <a href="#competencies">역량</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#skills">기술</a>
+        <a href="#publications">논문</a>
+        <a href="#contact">연락처</a>
+      </div>
+      <div class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()" role="button" aria-label="메뉴 열기" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="#hero" onclick="closeMobileNav()">소개</a>
+    <a href="#career" onclick="closeMobileNav()">경력</a>
+    <a href="#competencies" onclick="closeMobileNav()">역량</a>
+    <a href="#projects" onclick="closeMobileNav()">프로젝트</a>
+    <a href="#skills" onclick="closeMobileNav()">기술</a>
+    <a href="#publications" onclick="closeMobileNav()">논문</a>
+    <a href="#contact" onclick="closeMobileNav()">연락처</a>
+  </div>
+  </header>
+
+  <main>
+  <!-- ===== HERO ===== -->
+  <section class="hero section-dark" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-name">KIM JINHYUN</h1>
+      <p class="hero-subname">김 진 현</p>
+      <p class="hero-title">CAE 해석 엔지니어 · 8년 차</p>
+      <p class="hero-subtitle">
+        구조 · 동역학 · 열유동 · 피로해석<br>
+        해석 자동화 · AI 기반 설계 예측<br>
+        검증된 해석으로 설계 신뢰도를 확보하는 엔지니어
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">주요 프로젝트 보기</a>
+        <a href="#contact" class="btn btn-ghost">연락처</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAREER ===== -->
+  <section class="career section-light" id="career">
+    <div class="container">
+      <div class="sr">
+        <p class="section-label">Career</p>
+        <h2 class="section-title">경력 요약</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="career-list">
+
+        <!-- 모베이스전자 -->
+        <div class="career-company sr sr-d1">
+          <div class="career-period-block">
+            <p class="career-period">2021.09 — 현재</p>
+            <p class="career-company-name">㈜모베이스전자</p>
+            <p class="career-role">전자신뢰성시험팀 · 책임연구원</p>
+          </div>
+          <div class="career-detail">
+
+            <!-- 1. CAE 해석 -->
+            <div class="career-category">
+              <p class="career-category-header">1. 고분자 CAE 해석 <span class="career-category-summary">구조 · 동 · 진동 · 충돌 · 피로내구 · 열유동 · 접촉 및 소재 비선형</span></p>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">구조 / 동해석 · 비선형 해석</p>
+                  <p class="career-task-desc">자동차 전장 부품 및 제어기 류 강도 해석 검토 후 취약부 설계 개선안 제시<br>신규개발/양산 제품 선제 검토로 금형 수정비용 및 개발 기간 절감</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">ABAQUS</span>
+                    <span class="career-task-tag">HyperMesh</span>
+                  </div>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">진동해석</p>
+                  <p class="career-task-desc">BDC, LDC 등 제어기 고유진동수 파악 후 공진 회피<br>주파수 응답 해석으로 진동에 대한 구조 건전성 확보</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">ABAQUS</span>
+                  </div>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">충돌해석</p>
+                  <p class="career-task-desc">키보드 스위치 고속 충돌 시 동적 거동 파악(정해석 및 시험으로는 파악이 어려움)<br>파단 시 발생하는 Sharp Edge 방지 개선</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">ABAQUS</span>
+                    <span class="career-task-tag">HyperMesh</span>
+                  </div>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">피로내구해석</p>
+                  <p class="career-task-desc">텀블러 및 시소 스위치류 피로 내구 수명 계산(Stress-Life Method 이용)</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">FE-SAFE</span>
+                  </div>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">열유동해석</p>
+                  <p class="career-task-desc">공냉식 인버터 냉각 성능 평가 후, 문제점 개선<br>수냉식 인버터 와류 및 유동 개선으로 냉각 효율 향상<br>자동차용 무선충전기 공기 유동 흐름 개선</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">AcuSolve</span>
+                    <span class="career-task-tag">HyperWorks</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. 해석 자동화 프로그램 제작 -->
+            <div class="career-category">
+              <p class="career-category-header">2. 해석 자동화 프로그램 제작 <span class="career-category-summary">해석 업무에 AI 활용</span></p>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">강도 예측 모델 개발</p>
+                  <p class="career-task-desc">머신러닝을 이용하여 해석 없이 부품 마운팅부의 강도를 예측하는 모델 개발</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">Python</span>
+                    <span class="career-task-tag">Keras</span>
+                    <span class="career-task-tag">TensorFlow</span>
+                  </div>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">해석 자동화 플랫폼 개발</p>
+                  <p class="career-task-desc">제어기 진동 해석 자동화 웹 플랫폼 개발<br>키셋 로드 강도 해석 자동화 프로그램 개발</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">FastAPI</span>
+                    <span class="career-task-tag">ABAQUS Script</span>
+                    <span class="career-task-tag">AI Agent</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. 정합성 검증 -->
+            <div class="career-category">
+              <p class="career-category-header">3. 정합성 검증 <span class="career-category-summary">강도 · 유동 · 조명 해석 정합성 검증으로 해석 신뢰도 향상</span></p>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">강도 해석 정합성 검증</p>
+                  <p class="career-task-desc">고품 파단면 분석 후 파단 시작점 및 진행 방향 분석, 해석 경계조건과 파라미터 수정</p>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">유동 해석 정합성 검증</p>
+                  <p class="career-task-desc">차량용 인버터 및 무선충전기 개발 시, 열전대/열화상 카메라 등으로 시험-해석 정합성 검증 후 적합한 해석 물성 확보</p>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">조명 해석 정합성 검증</p>
+                  <p class="career-task-desc">해석 정확도가 현저히 낮은 기존 인디케이터 프리즘류의 해석 물성 상관성 분석</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. 업무 일정 관리 및 이력 DB화 등 파트 체계 개선 -->
+            <div class="career-category">
+              <p class="career-category-header">4. 업무 일정 관리 및 이력 DB화 등 파트 체계 개선 <span class="career-category-summary">해석 이력 · 물성 DB 구축으로 팀 내 지식 자산 체계화</span></p>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">해석 이력 및 해석 물성 DB화</p>
+                  <p class="career-task-desc">해석 결과 보고서 및 물성 데이터 DB화하여 팀 내 활용</p>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">해석 업무 일정 관리 프로세스화</p>
+                  <p class="career-task-desc">업무 일정 체계화하여 작업자 간 업무 파악 용이</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 현대에버다임 -->
+        <div class="career-company sr sr-d2">
+          <div class="career-period-block">
+            <p class="career-period">2017.10 — 2021.09</p>
+            <p class="career-company-name">㈜현대에버다임</p>
+            <p class="career-role">코어기술팀 · 대리</p>
+          </div>
+          <div class="career-detail">
+
+            <!-- 1. CAE 해석 -->
+            <div class="career-category">
+              <p class="career-category-header">1. CAE 해석 <span class="career-category-summary">구조 · 동 · 좌굴 · 피로내구 해석</span></p>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">구조 / 동해석</p>
+                  <p class="career-task-desc">양산 및 신규 장비(콘크리트 펌프카, 소방사다리, 크롤러드릴) 구조·동해석</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">ANSYS</span>
+                    <span class="career-task-tag">DAFUL</span>
+                  </div>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">좌굴 해석</p>
+                  <p class="career-task-desc">소방사다리의 얇은 판재 구조물 좌굴 해석으로 축 방향 하중에 대한 좌굴 안정성 검토</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">ANSYS</span>
+                  </div>
+                </div>
+              </div>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">피로내구해석</p>
+                  <p class="career-task-desc">콘크리트 펌프카 하부의 판재류 용접부 용접 형태에 따른 피로 내구 수명 계산</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">FEMFAT</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. 표준 업무 절차서 관리 -->
+            <div class="career-category">
+              <p class="career-category-header">2. 표준 업무 절차서 관리 <span class="career-category-summary">해석 품질 일관성 확보 및 부서 운영 효율화</span></p>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">절차서 재/개정 및 관리</p>
+                  <p class="career-task-desc">절차서 업데이트 및 갱신, 일관성 있는 결과와 명확한 작업 유도로 부서 업무 효율 관리</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 씨메트 -->
+        <div class="career-company sr sr-d3">
+          <div class="career-period-block">
+            <p class="career-period">2017.02 — 2017.08</p>
+            <p class="career-company-name">㈜씨메트</p>
+            <p class="career-role">기술지원팀 · 주임</p>
+          </div>
+          <div class="career-detail">
+
+            <!-- 1. CAE 해석 아웃소싱 -->
+            <div class="career-category">
+              <p class="career-category-header">1. CAE 해석 아웃소싱 <span class="career-category-summary">MBD · MFBD 다물체 동역학 해석</span></p>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">구조해석 / 다물체 동해석</p>
+                  <p class="career-task-desc">기업 해석 프로젝트 수행 (LG 드럼 세탁기 동특성, 컨베이어 동특성 등)</p>
+                  <div class="career-task-tags">
+                    <span class="career-task-tag">RecurDyn</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. 기술지원 및 교육 -->
+            <div class="career-category">
+              <p class="career-category-header">2. 기술지원 및 교육 <span class="career-category-summary">RecurDyn 기술 지원 및 기초 교육</span></p>
+              <div class="career-task">
+                <span class="career-task-bullet"></span>
+                <div class="career-task-content">
+                  <p class="career-task-name">동해석 정기 교육 및 기술지원</p>
+                  <p class="career-task-desc">RecurDyn 고객사 대상 동해석 기초 교육</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CORE COMPETENCIES ===== -->
+  <section class="competencies section-alt" id="competencies">
+    <div class="container">
+      <div class="sr">
+        <p class="section-label">Competencies</p>
+        <h2 class="section-title">핵심 역량</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="competencies-grid">
+        <div class="comp-card sr sr-d1">
+          <div class="comp-icon">⚙️</div>
+          <h3 class="comp-title">다물리 해석 역량</h3>
+          <p class="comp-desc">
+            구조, 동, 진동, 충돌, 피로내구, 열유동 등 폭넓은 해석 경험을 바탕으로,
+            문제에 맞는 해석 기법과 도구를 적용하여 실질적인 해결책을 도출합니다.
+            정해석으로 파악할 수 없는 비선형 거동이나 복합적인 물리 현상도,
+            여러 접근법을 시도하며 해결 방향을 찾아냅니다.
+          </p>
+        </div>
+        <div class="comp-card sr sr-d2">
+          <div class="comp-icon">🔍</div>
+          <h3 class="comp-title">시험 기반 신뢰도 확보</h3>
+          <p class="comp-desc">
+            "검증되지 않은 해석은 단순한 그래픽에 불과하다"는 철학으로 업무에 임합니다.
+            열전대, 열화상 카메라, 만능시험기 등으로 계측된 시험 데이터와 해석 결과의 오차를 줄이기 위해
+            물성치 튜닝 및 경계 조건 고도화를 끝까지 수행합니다.
+          </p>
+        </div>
+        <div class="comp-card sr sr-d3">
+          <div class="comp-icon">🚀</div>
+          <h3 class="comp-title">신기술 도입과 혁신 실행력</h3>
+          <p class="comp-desc">
+            전통적인 CAE 분석가에 머무르지 않고, AI 에이전트로 해석 프로세스를 자동화하고
+            머신러닝으로 강도 예측 모델을 개발합니다.
+            해석 리드타임 1일 → 30분 단축, 반복 해석 수일 → 초 단위 예측을 실현했습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KEY PROJECTS (Detailed) ===== -->
+  <section class="projects section-navy" id="projects">
+    <div class="container">
+      <div class="sr">
+        <p class="section-label">Key Projects</p>
+        <h2 class="section-title">주요 프로젝트 상세</h2>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="project-list">
+
+        <!-- Project 1: 와이퍼 M/F -->
+        <div class="project-item sr sr-d1">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div class="project-header-left">
+              <span class="project-badge">기구 거동 · MBD</span>
+              <h3 class="project-name">차량용 와이퍼 멀티펑션 스위치 기구 거동 분석 및 소음 저감</h3>
+              <p class="project-summary">현대자동차 양산 프로젝트 · 라쳇-스프링 기구 접촉 해석으로 소음 저감 설계안 도출</p>
+            </div>
+            <span class="project-toggle">+</span>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="detail-section">
+                <p class="detail-section-title">프로젝트 개요</p>
+                <div class="detail-grid">
+                  <div class="detail-item"><strong>대상:</strong> 현대차 와이퍼 멀티펑션 스위치 (양산)</div>
+                  <div class="detail-item"><strong>기간:</strong> 약 1~2개월</div>
+                  <div class="detail-item"><strong>역할:</strong> 주관 엔지니어</div>
+                  <div class="detail-item"><strong>협업:</strong> 설계팀 협업</div>
+                </div>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">기구 구조 및 문제</p>
+                <ul class="detail-list">
+                  <li>레버-브라켓 힌지 구조, 내부에 라쳇과 액시얼 인장스프링 배치</li>
+                  <li>스프링 중앙부가 라쳇 절도산에 접촉하여 활시위 형태로 조작력 생성</li>
+                  <li>스프링이 중립 위치로 복귀 시 라쳇과 SRC 충돌하여 <strong>소음 발생</strong></li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">해석 방법</p>
+                <ul class="detail-list">
+                  <li><strong>솔버:</strong> ABAQUS Explicit</li>
+                  <li>총 6개 강체 파트 모델링, 부품 간 접촉 조건 설정</li>
+                  <li><strong>3단계 순차 스탭 해석:</strong> 스프링 초기 셋팅 → 레버 초기 당김 → 실제 작동(라쳇 회전 → 장력 변화 → 복귀)</li>
+                  <li>각 스탭 앞 단계의 동적 해석 결과(속도, 변형, 응력)를 후속 스탭 경계조건으로 매핑</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">소음 저감 검토</p>
+                <ul class="detail-list">
+                  <li>소음을 직접 지표화 불가 → 고정부 반력(reaction force) 및 접촉 하중 기준 상대 비교</li>
+                  <li>라쳇 절도산 형상(각도, 곡률) 변수화하여 복수 설계안 비교</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">성과</p>
+                <ul class="detail-list">
+                  <li>고정부 반력 약 40% 저감</li>
+                  <li>정해석만으로 파악 불가능했던 기구 작동 시 동적 응력 집중부를 사전 규명</li>
+                  <li>반력 기반 상대 비교 방법론을 통해 소음 원인을 수치화하여 객관적으로 판단</li>
+                  <li>최적 절도산 형상 도출로 소음 저감 개선안 제시, 설계팀에 반영</li>
+                </ul>
+              </div>
+              <div class="project-tools">
+                <span class="tool-tag">ABAQUS Explicit</span>
+                <span class="tool-tag">기구 거동 해석</span>
+                <span class="tool-tag">접촉 해석</span>
+                <span class="tool-tag">현대차 양산</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: Head Impact -->
+        <div class="project-item sr sr-d2">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div class="project-header-left">
+              <span class="project-badge">충돌 해석 · 인증</span>
+              <h3 class="project-name">Head Impact 충돌 해석 및 인도 시장 법규 인증 통과</h3>
+              <p class="project-summary">기아차종 · 4회 시험-해석 사이클 · 파단면 분석으로 구조 개선안 도출</p>
+            </div>
+            <span class="project-toggle">+</span>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="detail-section">
+                <p class="detail-section-title">프로젝트 개요</p>
+                <div class="detail-grid">
+                  <div class="detail-item"><strong>대상:</strong> 기아자동차 차종 Head Impact 시험</div>
+                  <div class="detail-item"><strong>기간:</strong> 약 1년</div>
+                  <div class="detail-item"><strong>역할:</strong> 주관 엔지니어</div>
+                  <div class="detail-item"><strong>협업:</strong> 설계팀 + 인도 시장 담당자</div>
+                </div>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">시험 조건</p>
+                <ul class="detail-list">
+                  <li><strong>Headform:</strong> 6.8kg, <strong>속도:</strong> 24km/h</li>
+                  <li><strong>법적 요구:</strong> 충돌 후 날카로운 엣지(Sharp Edge) 발생 금지, 파편 비산 금지</li>
+                  <li>시험 장소: 현대자동차 남양연구소 충돌 시험실</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">NG 이력 및 개선</p>
+                <table class="detail-table">
+                  <thead>
+                    <tr><th>회차</th><th>결과</th><th>NG 원인</th><th>개선 조치</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1차</td><td>NG</td><td>베젤 파손 → 날카로운 엣지 발생</td><td>소재 변경(설계팀)</td></tr>
+                    <tr><td>2차</td><td>NG</td><td>파손X, 데코 파트 분해 비산</td><td>변형량 분석 후 변형 방지 리브 추가</td></tr>
+                    <tr><td>3차</td><td>NG</td><td>추가 포인트 NG 발생</td><td>지지부 취약화 (충격 흡수 유도)</td></tr>
+                    <tr><td>4차</td><td><strong>PASS</strong></td><td>—</td><td>최종 구조 개선안 확정</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">핵심 접근법</p>
+                <ul class="detail-list">
+                  <li>ABAQUS Explicit 비선형 충돌 해석</li>
+                  <li>현대 남양연구소 충돌 시험 직접 참관, 고품 파단면 분석</li>
+                  <li>파단 시작점 및 전파 방향 규명 → 해석 결과와 상호 보완</li>
+                  <li>지지부 의도적 취약화 및 내부 리브 보강으로 충돌 에너지 흡수 유도 (소재/구조 통합 설계)</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">성과</p>
+                <ul class="detail-list">
+                  <li>4회의 시험-해석-개선 사이클을 통해 최종 해외 법규 인증 시험 통과</li>
+                  <li>strain rate 물성 미보유라는 제약 환경에서도 시험-해석 교차 검증과 파단면 분석으로 신뢰도 있는 개선안 도출</li>
+                  <li>시험 결과만으로 규명하기 힘든 순간적인 동적 거동을 파악하여 문제 해결</li>
+                </ul>
+              </div>
+              <div class="project-tools">
+                <span class="tool-tag">ABAQUS Explicit</span>
+                <span class="tool-tag">비선형 충돌 해석</span>
+                <span class="tool-tag">파단면 분석</span>
+                <span class="tool-tag">인도 법규</span>
+                <span class="tool-tag">기아자동차</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: 진동 해석 자동화 -->
+        <div class="project-item sr sr-d1">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div class="project-header-left">
+              <span class="project-badge">해석 자동화 · 웹</span>
+              <h3 class="project-name">진동 해석 자동화 플랫폼 개발</h3>
+              <p class="project-summary">CAD → Mesh → 해석 → 결과 전 과정 자동화 · 리드타임 1일 → 30분</p>
+            </div>
+            <span class="project-toggle">+</span>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="detail-section">
+                <p class="detail-section-title">프로젝트 개요</p>
+                <div class="detail-grid">
+                  <div class="detail-item"><strong>대상:</strong> 브라켓류 고유진동수(Mode) 검토 해석</div>
+                  <div class="detail-item"><strong>기간:</strong> 약 3개월</div>
+                  <div class="detail-item"><strong>역할:</strong> 프로젝트 리더</div>
+                  <div class="detail-item"><strong>협업:</strong> AI 에이전트 활용 (Gemini, GLM)</div>
+                </div>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">자동화 파이프라인</p>
+                <table class="detail-table">
+                  <thead>
+                    <tr><th>단계</th><th>기존 (수동)</th><th>자동화 후</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1. CAD 분할</td><td>CATIA V5 수동 분할</td><td>CATIA Python Script 자동 분할</td></tr>
+                    <tr><td>2. Mesh 생성</td><td>HyperMesh 수동</td><td>HM Batch Translator 자동 변환</td></tr>
+                    <tr><td>3. 해석 셋업</td><td>ABAQUS CAE 수동</td><td>Python Script 자동 생성</td></tr>
+                    <tr><td>4. Solver 실행</td><td>수동 실행</td><td>ABAQUS Standalone 자동 구동</td></tr>
+                    <tr><td>5. 결과 확인</td><td>ODB 수동 확인</td><td>JSON 자동 생성 + 웹 UI</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">웹 플랫폼 (FastAPI)</p>
+                <ul class="detail-list">
+                  <li>서버 PC 상시 구동 → 클라이언트 웹 브라우저 접속 → CAD 업로드 → 자동 해석 → 결과 반환</li>
+                  <li>Sequential Queue Manager, Access Log, 3-Panel 대시보드</li>
+                  <li>Lanczos 고유치 해석 (10 Mode, Mass Normalization), Tie Constraint 자동 생성</li>
+                  <li><strong>현재 상태:</strong> 완성, 팀 내 운용 중</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">성과</p>
+                <ul class="detail-list">
+                  <li>해석 리드타임 1일 → 30분 (94% 감소)</li>
+                  <li>엔지니어 개입 최소화로 인적 오차 제거, 재현성 확보</li>
+                  <li>해석자가 아닌 설계자가 데이터 입력하여 해석 결과 도출 가능</li>
+                  <li>해석 내역 DB화로 추후 머신러닝 트레이닝 셋으로 활용 가능</li>
+                  <li>AI 에이전트를 활용한 개발 프로세스로 신기술 도입 사례 확립</li>
+                </ul>
+              </div>
+              <div class="project-tools">
+                <span class="tool-tag">Python</span>
+                <span class="tool-tag">FastAPI</span>
+                <span class="tool-tag">ABAQUS Script</span>
+                <span class="tool-tag">CATIA Script</span>
+                <span class="tool-tag">HyperMesh</span>
+                <span class="tool-tag">AI Agent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: ML 강도 예측 -->
+        <div class="project-item sr sr-d2">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div class="project-header-left">
+              <span class="project-badge">AI · 머신러닝</span>
+              <h3 class="project-name">머신러닝 기반 마운팅부 강도 예측 모델</h3>
+              <p class="project-summary">DOE 200건 학습 · 회귀+분류 이중 모델 · 한국자동차공학회 포스터 발표</p>
+            </div>
+            <span class="project-toggle">+</span>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="detail-section">
+                <p class="detail-section-title">프로젝트 개요</p>
+                <div class="detail-grid">
+                  <div class="detail-item"><strong>대상:</strong> 마운팅부 체결 구조 강도 예측</div>
+                  <div class="detail-item"><strong>기간:</strong> 약 2개월</div>
+                  <div class="detail-item"><strong>역할:</strong> 프로젝트 리더</div>
+                  <div class="detail-item"><strong>학술:</strong> 한국자동차공학회 포스터 (제1저자)</div>
+                </div>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">데이터셋</p>
+                <ul class="detail-list">
+                  <li>DOE 기반 학습 데이터 구성, 총 약 200건 ABAQUS 구조 해석 케이스</li>
+                  <li><strong>입력 변수(6개):</strong> 브라켓 두께/가로/세로, 리브 두께/가로/세로</li>
+                  <li><strong>출력 변수:</strong> 최대 인장응력 (MPa)</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">이중 모델 구조</p>
+                <ul class="detail-list">
+                  <li><strong>회귀 모델:</strong> 설계 변수 → 최대 인장응력 예측 (해석값 대비 약 89% 예측 정확도)</li>
+                  <li><strong>분류 모델:</strong> 설계 변수 → Pass/Fail 판정 (허용 응력 기준)</li>
+                  <li>TensorFlow/Keras (오픈소스)</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">성과</p>
+                <ul class="detail-list">
+                  <li>해석 수일 소요 → 초 단위 예측으로 설계 초기 의사결정 속도 혁신</li>
+                  <li>설계 변수-강도 관계 도출로 설계팀에 구조적 인사이트 제공</li>
+                  <li>설계 가이드 고도화에 기여 (현재 경험적 설계 완성으로 모델 사용 빈도 감소)</li>
+                </ul>
+              </div>
+              <div class="project-tools">
+                <span class="tool-tag">Python</span>
+                <span class="tool-tag">TensorFlow</span>
+                <span class="tool-tag">Keras</span>
+                <span class="tool-tag">DOE</span>
+                <span class="tool-tag">ABAQUS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: 세탁기 동특성 진동 해석 -->
+        <div class="project-item sr sr-d1">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div class="project-header-left">
+              <span class="project-badge">동역학 · RecurDyn</span>
+              <h3 class="project-name">세탁기 동특성 및 진동 해석</h3>
+              <p class="project-summary">LG 세탁기 · 강체-변형체 혼합 모델 · C++ 파라미터 최적화로 시험 대비 80% 정합성 확보</p>
+            </div>
+            <span class="project-toggle">+</span>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="detail-section">
+                <p class="detail-section-title">프로젝트 개요</p>
+                <div class="detail-grid">
+                  <div class="detail-item"><strong>대상:</strong> LG 세탁기 (작동 시 동특성 검토)</div>
+                  <div class="detail-item"><strong>기간:</strong> 약 2개월</div>
+                  <div class="detail-item"><strong>역할:</strong> 주관 엔지니어</div>
+                  <div class="detail-item"><strong>소속:</strong> 씨메트 (RecurDyn 전문기업)</div>
+                </div>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">문제 정의</p>
+                <ul class="detail-list">
+                  <li>탈수 시 고속 회전 진동에 대해 해석-시험 간 정합성 확보되지 않음</li>
+                  <li>체결 부싱이 다수 배치되어 수동 파라미터 조정으로는 수렴 곤란</li>
+                  <li>기존: 엔지니어 경험에 의존한 수동 수정 → 재현성 낮음</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">해석 방법</p>
+                <ul class="detail-list">
+                  <li><strong>솔버:</strong> RecurDyn (다물체 동역학 해석)</li>
+                  <li><strong>강체-변형체 혼합 모델:</strong> 드럼 통·외부 케이스(변형체), 서스펜션 계열(강체+스프링-댐퍼 요소)</li>
+                  <li><strong>비선형 댐핑:</strong> 스프링 및 댐퍼 요소로 서스펜션 비선형 거동 모사</li>
+                  <li><strong>C++ 파라미터 최적화:</strong> 해석 조건 변수화 → 자동 파라미터 수정 → 해석 실행 → 시험 데이터와 비교하는 반복 과정 구현</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">성과</p>
+                <ul class="detail-list">
+                  <li>시험 대비 약 80% 수준의 진동 정합성 확보</li>
+                  <li>핵심 해석 파라미터 DB 구축 → 유사 기종 진동 검토 시 활용 기반 마련</li>
+                </ul>
+              </div>
+              <div class="project-tools">
+                <span class="tool-tag">RecurDyn</span>
+                <span class="tool-tag">C++</span>
+                <span class="tool-tag">강체-변형체 혼합</span>
+                <span class="tool-tag">비선형 댐핑</span>
+                <span class="tool-tag">LG</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6: 피로내구 해석 -->
+        <div class="project-item sr sr-d2">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div class="project-header-left">
+              <span class="project-badge">피로내구 · FEMFAT</span>
+              <h3 class="project-name">콘크리트 펌프카 붐대 용접부 피로내구 해석</h3>
+              <p class="project-summary">현대에버다임 · 다수 신규 기종 대상 · FEMFAT 기반 용접 비드별 피로 손상도 평가</p>
+            </div>
+            <span class="project-toggle">+</span>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="detail-section">
+                <p class="detail-section-title">프로젝트 개요</p>
+                <div class="detail-grid">
+                  <div class="detail-item"><strong>대상:</strong> 콘크리트 펌프카 상부 붐 (신규 개발 다수 기종)</div>
+                  <div class="detail-item"><strong>기간:</strong> 현대에버다임 재직 기간(약 4년) 중 지속</div>
+                  <div class="detail-item"><strong>역할:</strong> 주관 엔지니어</div>
+                  <div class="detail-item"><strong>협업:</strong> 설계팀과 개선안 도출</div>
+                </div>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">문제 정의</p>
+                <ul class="detail-list">
+                  <li>붐대는 반복 하중을 받는 구조물로 용접부 피로 균열 발생 위험</li>
+                  <li>신규 기종마다 형상·하중 조건 상이 → 각 기종별 개별 검토 필요</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">해석 방법</p>
+                <ul class="detail-list">
+                  <li><strong>구조 해석:</strong> ANSYS 정적 해석으로 응력 분포 도출</li>
+                  <li><strong>피로 해석:</strong> FEMFAT — 정해석 결과를 하중 입력으로 매핑</li>
+                  <li><strong>용접부 모델링:</strong> 용접 비드별 형상 데이터 개별 입력</li>
+                  <li><strong>소재:</strong> 스테인리스 스틸 판재 구조</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">성과</p>
+                <ul class="detail-list">
+                  <li>경험 의존적 판단을 FEMFAT 기반 정량적 평가로 전환, 개선안 실제 도면 반영</li>
+                  <li>용접 방식 변경 및 판재 두께 최적화로 설계 개선안 도출</li>
+                </ul>
+              </div>
+              <div class="project-tools">
+                <span class="tool-tag">FEMFAT</span>
+                <span class="tool-tag">ANSYS</span>
+                <span class="tool-tag">피로내구</span>
+                <span class="tool-tag">현대에버다임</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 7: 냉각 구조 정합성 검증 -->
+        <div class="project-item sr sr-d1">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div class="project-header-left">
+              <span class="project-badge">열유동 · 정합성 검증</span>
+              <h3 class="project-name">냉각 구조 시험-해석 정합성 검증 및 열유동 해석 내재화</h3>
+              <p class="project-summary">공냉/수냉 인버터 · WPC · 열전대+열화상 카메라 측정 · 학술대회 논문 2건 (제1저자)</p>
+            </div>
+            <span class="project-toggle">+</span>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="detail-section">
+                <p class="detail-section-title">프로젝트 개요</p>
+                <div class="detail-grid">
+                  <div class="detail-item"><strong>대상:</strong> 공냉식/수냉식 인버터, 무선충전기(WPC)</div>
+                  <div class="detail-item"><strong>기간:</strong> 모베이스전자 재직 기간 중 지속</div>
+                  <div class="detail-item"><strong>역할:</strong> 주관 엔지니어 (시험 측정~정합성 검증)</div>
+                  <div class="detail-item"><strong>학술:</strong> 한국자동차공학회 논문 2건 (제1저자)</div>
+                </div>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">문제 정의</p>
+                <ul class="detail-list">
+                  <li>부서 내 열유동 해석 레퍼런스(데이터, 절차서, 물성 DB) 부족</li>
+                  <li>시험 데이터 기반 정합성 검증 프로세스 미비</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">정합성 검증 방법</p>
+                <ul class="detail-list">
+                  <li><strong>열전대:</strong> 각 소자별 온도, 발열부 냉각 온도, 입/출구 압력 측정</li>
+                  <li><strong>열화상 카메라:</strong> 발열 분포 시각화, 핫스팟 규명</li>
+                  <li><strong>비교 지표:</strong> 최대 온도, 냉각 후 온도, 소자별 온도 비율</li>
+                  <li><strong>파라미터 튜닝:</strong> 공기 타입, 수렴 기준 등 해석 조건 조정</li>
+                </ul>
+              </div>
+              <div class="detail-section">
+                <p class="detail-section-title">성과</p>
+                <ul class="detail-list">
+                  <li>자연대류 시 Boussinesq 근사 적용 등 조건별 해석 설정 가이드 명확화</li>
+                  <li>해석파트 내 열유동 해석 기법 내제화</li>
+                  <li>후임 엔지니어 재현 가능하도록 해석 절차서 표준화</li>
+                  <li>고객사 평가 해석 항목 점수 획득, 학술대회 논문 2건 제출로 외부 검증</li>
+                </ul>
+              </div>
+              <div class="project-tools">
+                <span class="tool-tag">AcuSolve</span>
+                <span class="tool-tag">Fluent</span>
+                <span class="tool-tag">열전대</span>
+                <span class="tool-tag">열화상 카메라</span>
+                <span class="tool-tag">KSAE 논문</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TECHNICAL SKILLS ===== -->
+  <section class="skills section-dark" id="skills">
+    <div class="container">
+      <div class="sr">
+        <p class="section-label">Technical Skills</p>
+        <h2 class="section-title">기술 스택</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="sr sr-d1">
+          <p class="skill-category-label">구조 · 동역학 해석</p>
+          <div class="skill-pills">
+            <span class="pill">ANSYS</span>
+            <span class="pill">ABAQUS</span>
+            <span class="pill">RecurDyn</span>
+            <span class="pill">FEMFAT</span>
+            <span class="pill">FE-SAFE</span>
+          </div>
+        </div>
+        <div class="sr sr-d2">
+          <p class="skill-category-label">열유동 · 조명 해석</p>
+          <div class="skill-pills">
+            <span class="pill">AcuSolve</span>
+            <span class="pill">HyperWorks</span>
+            <span class="pill">Speos</span>
+          </div>
+        </div>
+        <div class="sr sr-d3">
+          <p class="skill-category-label">CAD · 설계</p>
+          <div class="skill-pills">
+            <span class="pill">CATIA V5</span>
+            <span class="pill">CATIA Script</span>
+            <span class="pill">HyperMesh</span>
+          </div>
+        </div>
+        <div class="sr sr-d4">
+          <p class="skill-category-label">프로그래밍 · 자동화</p>
+          <div class="skill-pills">
+            <span class="pill">Python</span>
+            <span class="pill">ABAQUS Script</span>
+            <span class="pill">C / C++</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PUBLICATIONS ===== -->
+  <section class="publications section-alt" id="publications">
+    <div class="container">
+      <div class="sr">
+        <p class="section-label">Publications</p>
+        <h2 class="section-title">학술 실적</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="pub-list">
+        <div class="pub-item sr sr-d1">
+          <p class="pub-title">머신러닝 기법을 이용한 스위치류 체결부의 강도 예측 모델 개발</p>
+          <p class="pub-meta">
+            <span>제1저자</span> · 한국자동차공학회 학술대회 · 2024<br>
+            TensorFlow/Keras 기반 다층퍼셉트론 회귀 모델, 오차율 11% 수준 예측 신뢰도 확보
+          </p>
+        </div>
+        <div class="pub-item sr sr-d2">
+          <p class="pub-title">차량용 AC 인버터 발열 저감을 위한 열유동 해석에 관한 연구</p>
+          <p class="pub-meta">
+            <span>제1저자</span> · 한국자동차공학회 학술대회 · 2024<br>
+            소자(PCB)~시스템 2단계 열유동 해석, 실물 온도 측정 결과와 비교하여 해석 정합성 확보
+          </p>
+        </div>
+        <div class="pub-item sr sr-d3">
+          <p class="pub-title">차량용 수냉식 인버터의 CFD 해석을 통한 냉각 성능 평가</p>
+          <p class="pub-meta">
+            <span>제1저자</span> · 한국자동차공학회 학술대회 · 2024<br>
+            수냉식 냉각 유로 내부 열유동 특성 분석, 실제 작동 환경 온도 측정으로 해석 모델 신뢰성 검증
+          </p>
+        </div>
+      </div>
+      <div class="pub-summary sr">
+        <strong>학술대회 발표 실적:</strong> 2024년 4건, 2025년 2건 (공동저자 포함)
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION & AWARDS ===== -->
+  <section class="education section-light" id="education">
+    <div class="container">
+      <div class="sr">
+        <p class="section-label">Education & Awards</p>
+        <h2 class="section-title">학력</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card sr sr-d1">
+          <p class="edu-period">2008 — 2017</p>
+          <p class="edu-name">중앙대학교 (서울)</p>
+          <p class="edu-detail">기계공학과 · 학사 (학점 3.2/4.5)</p>
+        </div>
+        <div class="edu-card sr sr-d2">
+          <p class="edu-period">2005 — 2008</p>
+          <p class="edu-name">한국디지털미디어 고등학교</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHILOSOPHY ===== -->
+  <section class="philosophy section-dark" id="philosophy">
+    <div class="container">
+      <div class="sr">
+        <p class="section-label">Philosophy</p>
+        <h2 class="section-title">엔지니어 철학</h2>
+        <div class="accent-line"></div>
+      </div>
+      <div class="philosophy-content">
+        <blockquote class="philosophy-quote sr">
+          검증되지 않은 해석은 단순한 그래픽에 불과하다.<br>
+          시험 데이터와의 교차 검증을 통해 얻은 신뢰도만이<br>
+          진정한 엔지니어링 가치다.
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer section-dark" id="contact">
+    <div class="footer-inner">
+      <div class="footer-contacts">
+        <div class="footer-contact">
+          <span class="footer-contact-icon">✉</span>
+          kjinhyun@gmail.com
+        </div>
+        <div class="footer-contact">
+          <span class="footer-contact-icon">☎</span>
+          010-8945-5444
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/kjinhyun" target="_blank">GitHub</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 김진현. All rights reserved.</p>
+    </div>
+  </footer>
+  </main>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // === Scroll Reveal ===
+    (function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.sr').forEach(function(el) { observer.observe(el); });
+    })();
+
+    // === Sticky Nav ===
+    (function() {
+      var nav = document.getElementById('navbar');
+      var sections = document.querySelectorAll('section[id]');
+      var navLinks = document.querySelectorAll('.nav-links a');
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+        var current = '';
+        sections.forEach(function(s) {
+          if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+        });
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+        });
+      });
+    })();
+
+    // === Mobile Nav ===
+    function toggleMobileNav() {
+      document.getElementById('hamburger').classList.toggle('open');
+      document.getElementById('mobileNav').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMobileNav() {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('mobileNav').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // === Project Accordion ===
+    function toggleProject(header) {
+      var item = header.closest('.project-item');
+      var detail = item.querySelector('.project-detail');
+      var toggle = item.querySelector('.project-toggle');
+      var isOpen = detail.classList.contains('open');
+      // Close all others
+      document.querySelectorAll('.project-detail.open').forEach(function(d) {
+        d.classList.remove('open');
+        d.closest('.project-item').querySelector('.project-toggle').classList.remove('open');
+      });
+      if (!isOpen) {
+        detail.classList.add('open');
+        toggle.classList.add('open');
+      }
+    }
+  </script>
+
+</body>
+</html>
