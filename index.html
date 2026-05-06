@@ -204,6 +204,33 @@
     }
     .hero-desc br { content: ''; display: block; margin-top: 2px; }
     .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero-layout { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; }
+    .hero-main { flex: 1; }
+    .hero-contact {
+      flex-shrink: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      text-align: right;
+      min-width: 200px;
+    }
+    .hero-contact-label {
+      font-family: var(--font-mono);
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero-contact-item {
+      font-size: 14px; color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .hero-contact-item:last-child { margin-bottom: 0; }
+    .hero-contact a.hero-contact-item { color: var(--accent); font-weight: 500; }
+    .hero-contact a.hero-contact-item:hover { text-decoration: underline; }
 
     /* ===== SECTION ===== */
     .section { margin-top: 72px; scroll-margin-top: 24px; }
@@ -577,6 +604,8 @@
       .edu-grid { grid-template-columns: 1fr; }
       .detail-grid { grid-template-columns: 1fr; }
       .hero-name { font-size: 32px; }
+      .hero-layout { flex-direction: column; }
+      .hero-contact { text-align: left; min-width: auto; }
       .section-title { font-size: 22px; }
     }
     @media (max-width: 480px) {
@@ -612,7 +641,7 @@
 
   <!-- Mobile Header -->
   <div class="mobile-header">
-    <span class="mobile-header-logo">KIM J.H.</span>
+    <span class="mobile-header-logo">김진현</span>
     <button class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="메뉴 열기">
       <span></span><span></span><span></span>
     </button>
@@ -623,7 +652,7 @@
     <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
       <div class="sidebar-logo">
-        <div class="sidebar-logo-name">KIM J.H.</div>
+        <div class="sidebar-logo-name">김진현</div>
         <div class="sidebar-logo-sub">CAE Engineer</div>
       </div>
       <nav class="sidebar-nav" id="sidebarNav">
@@ -634,7 +663,6 @@
         <a href="#skills" onclick="closeSidebar()"><span class="nav-dot"></span>기술</a>
         <a href="#publications" onclick="closeSidebar()"><span class="nav-dot"></span>논문</a>
         <a href="#education" onclick="closeSidebar()"><span class="nav-dot"></span>학력</a>
-        <a href="#contact" onclick="closeSidebar()"><span class="nav-dot"></span>연락처</a>
       </nav>
       <div class="sidebar-footer">
         <p>© 2026 김진현</p>
@@ -647,22 +675,30 @@
 
         <!-- HERO -->
         <section class="hero section" id="hero">
-          <div class="sr">
-            <h1 class="hero-name">KIM JINHYUN</h1>
-            <p class="hero-kr">김 진 현</p>
-            <p class="hero-title">CAE 해석 엔지니어</p>
-            <p class="hero-desc">
-              구조 · 동역학 · 열유동 · 피로해석<br>
-              해석 자동화 · AI 기반 설계 예측<br>
-              검증된 해석으로 설계 신뢰도를 확보하는 엔지니어
-            </p>
-            <div class="hero-tags">
-              <span class="pill">구조해석</span>
-              <span class="pill">동역학</span>
-              <span class="pill">열유동</span>
-              <span class="pill">피로내구</span>
-              <span class="pill">Python</span>
-              <span class="pill">AI/ML</span>
+          <div class="sr hero-layout">
+            <div class="hero-main">
+              <h1 class="hero-name">KIM JINHYUN</h1>
+              <p class="hero-kr">김 진 현</p>
+              <p class="hero-title">CAE 해석 엔지니어</p>
+              <p class="hero-desc">
+                구조 · 동역학 · 열유동 · 피로해석<br>
+                해석 자동화 · AI 기반 설계 예측<br>
+                검증된 해석으로 설계 신뢰도를 확보하는 엔지니어
+              </p>
+              <div class="hero-tags">
+                <span class="pill">구조해석</span>
+                <span class="pill">동역학</span>
+                <span class="pill">열유동</span>
+                <span class="pill">피로내구</span>
+                <span class="pill">Python</span>
+                <span class="pill">AI/ML</span>
+              </div>
+            </div>
+            <div class="hero-contact">
+              <p class="hero-contact-label">Contact</p>
+              <p class="hero-contact-item">✉ kjinhyun@gmail.com</p>
+              <p class="hero-contact-item">☎ 010-8945-5444</p>
+              <a href="https://github.com/kjinhyun" target="_blank" class="hero-contact-item">⌘ GitHub</a>
             </div>
           </div>
         </section>
@@ -684,11 +720,11 @@
               <p class="career-card-role">전자신뢰성시험팀 · 책임연구원</p>
 
               <div class="career-category">
-                <p class="career-cat-header">1. 고분자 CAE 해석 <span class="career-cat-summary">구조 · 동 · 진동 · 충돌 · 피로내구 · 열유동 · 접촉 및 소재 비선형</span></p>
+                <p class="career-cat-header">1. 고분자 CAE 해석 <span class="career-cat-summary">구조 · 동 · 진동 · 충돌 · 피로내구 · 열유동 · 접촉 및 재료 비선형</span></p>
                 <div class="career-task">
-                  <p class="career-task-name">구조 / 동해석 · 비선형 해석</p>
+                  <p class="career-task-name">구조 / 동해석 (비선형 해석)</p>
                   <p class="career-task-desc">자동차 전장 부품 및 제어기 류 강도 해석 검토 후 취약부 설계 개선안 제시<br>신규개발/양산 제품 선제 검토로 금형 수정비용 및 개발 기간 절감</p>
-                  <div class="career-task-tags"><span class="tag-mono">ABAQUS</span><span class="tag-mono">HyperMesh</span></div>
+                  <div class="career-task-tags"><span class="tag-mono">ABAQUS</span><span class="tag-mono">HyperWorks</span></div>
                 </div>
                 <div class="career-task">
                   <p class="career-task-name">진동해석</p>
